@@ -1,41 +1,37 @@
+//BaseNode.js
 import { Handle, Position } from 'reactflow';
 
-const BaseNode = ({ 
-  id, 
-  title, 
-  inputs = [],    // array of { id: string, style: object (optional) }
-  outputs = [],   // array of { id: string, style: object (optional) }
-  children        // content inside the node
-}) => {
+const BaseNode = ({ id, title, inputs = [], outputs = [], children }) => {
   return (
-    <div style={{ width: 200, minHeight: 80, border: '1px solid black', padding: 8, boxSizing: 'border-box' }}>
-      {/* Render input handles on the left */}
-      {inputs.map(({ id: handleId, style }, idx) => (
+    <div className="w-64 min-h-[120px] border-2 border-indigo-100 rounded-xl bg-white shadow-lg p-4 box-border relative transition-all hover:shadow-xl">
+      {/* Input Handles (Left) */}
+      {inputs.map(({ id: handleId, style }) => (
         <Handle
           key={handleId}
           type="target"
           position={Position.Left}
           id={handleId}
-          style={style}
+          className="w-3 h-3 !bg-indigo-500 border-2 border-white"
         />
       ))}
 
       {/* Title */}
-      <div style={{ fontWeight: 'bold', marginBottom: 8 }}>{title}</div>
-
-      {/* Main content passed from each node */}
-      <div>
-        {children}
+      <div className="text-indigo-600 font-bold text-md mb-4 select-none flex items-center">
+        <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
+        {title}
       </div>
 
-      {/* Render output handles on the right */}
-      {outputs.map(({ id: handleId, style }, idx) => (
+      {/* Content */}
+      <div className="space-y-4 text-gray-700">{children}</div>
+
+      {/* Output Handles (Right) */}
+      {outputs.map(({ id: handleId, style }) => (
         <Handle
           key={handleId}
           type="source"
           position={Position.Right}
           id={handleId}
-          style={style}
+          className="w-3 h-3 !bg-indigo-500 border-2 border-white"
         />
       ))}
     </div>
