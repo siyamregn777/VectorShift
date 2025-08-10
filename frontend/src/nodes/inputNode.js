@@ -1,4 +1,5 @@
-// // inputNode.js
+// src/nodes/InputNode.js
+
 import { useState } from 'react';
 import BaseNode from './BaseNode';
 
@@ -12,28 +13,49 @@ export const InputNode = ({ id, data }) => {
       title="Input"
       outputs={[{ id: `${id}-value` }]}
     >
-      <div>
-        <label>
-          Name:
-          <input 
-            type="text" 
-            value={currName} 
-            onChange={e => setCurrName(e.target.value)} 
+      {/* Outer wrapper: vertical layout with gap between sections */}
+      <div className="flex flex-col gap-4">
+        {/* Name field: label above input with a small gap */}
+        <div className="flex flex-col gap-2">
+          <label
+            className="text-sm font-semibold text-gray-700"
+            htmlFor={`${id}-name`}
+          >
+            Name
+          </label>
+          <input
+            id={`${id}-name`}
+            type="text"
+            value={currName}
+            onChange={e => setCurrName(e.target.value)}
+            className="w-full border border-gray-300 rounded-none px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            placeholder="Input name"
           />
-        </label>
-      </div>
-      <div>
-        <label>
-          Type:
-          <select value={inputType} onChange={e => setInputType(e.target.value)}>
+        </div>
+
+        {/* Type field: label above select with a small gap */}
+        <div className="flex flex-col gap-2">
+          <label
+            className="text-sm font-semibold text-gray-700"
+            htmlFor={`${id}-type`}
+          >
+            Type
+          </label>
+          <select
+            id={`${id}-type`}
+            value={inputType}
+            onChange={e => setInputType(e.target.value)}
+            className="w-full border border-gray-300 rounded-none px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          >
             <option value="Text">Text</option>
             <option value="File">File</option>
           </select>
-        </label>
+        </div>
       </div>
     </BaseNode>
   );
 };
+
 
 // import { useState } from 'react';
 // import { Handle, Position } from 'reactflow';
